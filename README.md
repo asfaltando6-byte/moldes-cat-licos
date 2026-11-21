@@ -1,6 +1,6 @@
 # Fé em Cada Ponto — Moldes de Crochê Católico
 
-Landing page completa em português, com imagens locais, fonte Montserrat, carrossel automático, galeria ampliável, quatro bônus, FAQ e notificações de clientes.
+Landing page completa em português, com imagens locais, fonte Montserrat, dois carrosséis automáticos, galeria ampliável, quatro bônus, FAQ e notificações de clientes.
 
 ## Hospedar na Vercel
 
@@ -10,7 +10,8 @@ Importe este repositório na Vercel. O arquivo `vercel.json` define o diretório
 
 - `dist/index.html`: página e oferta.
 - `dist/styles.css`: layout responsivo.
-- `dist/app.js`: carrossel, galeria e janelas.
+- `dist/app.js`: dois carrosséis independentes, galeria e janelas.
+- `dist/meta-pixel.js`: inicialização do Pixel da Meta e PageView.
 - `dist/clientes.js`: os 30 nomes fornecidos pelo proprietário.
 - `dist/notifications.js`: notificações no canto inferior esquerdo.
 - `dist/assets/`: todos os mockups e imagens usados no projeto.
@@ -30,4 +31,4 @@ Os botões da oferta abrem um aviso de preparação da coleção. O checkout nã
 
 Na raiz, execute `python3 -m http.server 8080 --directory dist` e abra `http://localhost:8080`.
 
-Não há rastreadores ou integrações de pagamento configurados. Google Fonts é usado com alternativa Montserrat/Arial do sistema.
+O Pixel da Meta **1000784222921167** está configurado com o evento **PageView**, uma vez por carregamento. Não há evento Purchase nos botões nem integração de pagamento configurada. Google Fonts é usado com alternativa Montserrat/Arial do sistema.

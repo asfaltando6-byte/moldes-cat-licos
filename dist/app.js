@@ -22,46 +22,46 @@ document.querySelectorAll('dialog').forEach(dialog => {
   });
 });
 document.getElementById('year').textContent = new Date().getFullYear();
-const carousel = document.querySelector('.carousel-window');
-const carouselGroup = document.querySelector('.carousel-run');
-const toggle = document.getElementById('carousel-toggle');
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-let manuallyPaused = reducedMotion.matches;
-let pointerActive = false;
-let hovering = false;
-let focused = false;
+const carouselStates = [...document.querySelectorAll('.pages-section')].map(section => {
+  const viewport = section.querySelector('.carousel-window');
+  const group = section.querySelector('.carousel-run');
+  const toggle = section.querySelector('.carousel-toggle');
+  const state = { viewport, group, toggle, paused: reducedMotion.matches, pointer: false, hovering: false, focused: false, userScrollUntil: 0, fraction: 0 };
+  function updateControl() {
+    toggle.textContent = state.paused ? '▶' : 'Ⅱ';
+    toggle.setAttribute('aria-pressed', String(state.paused));
+    toggle.setAttribute('aria-label', state.paused ? 'Reproduzir carrossel automático' : 'Pausar carrossel automático');
+  }
+  toggle.addEventListener('click', () => { state.paused = !state.paused; updateControl(); });
+  viewport.addEventListener('pointerdown', () => { state.pointer = true; });
+  window.addEventListener('pointerup', () => { state.pointer = false; });
+  window.addEventListener('pointercancel', () => { state.pointer = false; });
+  viewport.addEventListener('pointerenter', event => { if (event.pointerType === 'mouse') state.hovering = true; });
+  viewport.addEventListener('pointerleave', () => { state.hovering = false; });
+  viewport.addEventListener('focusin', () => { state.focused = true; });
+  viewport.addEventListener('focusout', () => { state.focused = false; });
+  viewport.addEventListener('wheel', () => { state.userScrollUntil = performance.now() + 2500; }, { passive: true });
+  viewport.addEventListener('touchstart', () => { state.userScrollUntil = performance.now() + 4000; }, { passive: true });
+  viewport.addEventListener('touchend', () => { state.userScrollUntil = performance.now() + 2500; }, { passive: true });
+  reducedMotion.addEventListener('change', event => { state.paused = event.matches; updateControl(); });
+  updateControl();
+  return state;
+});
 let lastFrame = 0;
-let scrollFraction = 0;
-let userScrollUntil = 0;
-function updateControl() {
-  toggle.textContent = manuallyPaused ? '▶' : 'Ⅱ';
-  toggle.setAttribute('aria-pressed', String(manuallyPaused));
-  toggle.setAttribute('aria-label', manuallyPaused ? 'Reproduzir carrossel automático' : 'Pausar carrossel automático');
-}
-toggle.addEventListener('click', () => { manuallyPaused = !manuallyPaused; updateControl(); });
-carousel.addEventListener('pointerdown', () => { pointerActive = true; });
-window.addEventListener('pointerup', () => { pointerActive = false; });
-window.addEventListener('pointercancel', () => { pointerActive = false; });
-carousel.addEventListener('pointerenter', event => { if (event.pointerType === 'mouse') hovering = true; });
-carousel.addEventListener('pointerleave', () => { hovering = false; });
-carousel.addEventListener('focusin', () => { focused = true; });
-carousel.addEventListener('focusout', () => { focused = false; });
-carousel.addEventListener('wheel', () => { userScrollUntil = performance.now() + 2500; }, { passive: true });
-carousel.addEventListener('touchstart', () => { userScrollUntil = performance.now() + 4000; }, { passive: true });
-carousel.addEventListener('touchend', () => { userScrollUntil = performance.now() + 2500; }, { passive: true });
-reducedMotion.addEventListener('change', event => { manuallyPaused = event.matches; updateControl(); });
-function animateCarousel(time) {
+function animateCarousels(time) {
   const elapsed = lastFrame ? Math.min(time - lastFrame, 50) : 0;
   lastFrame = time;
-  if (!manuallyPaused && !pointerActive && !hovering && !focused && !document.hidden && time > userScrollUntil && !document.querySelector('dialog[open]')) {
-    const cycleWidth = carouselGroup.getBoundingClientRect().width;
-    scrollFraction += elapsed * 0.036;
-    const distance = Math.floor(scrollFraction);
-    scrollFraction -= distance;
-    carousel.scrollLeft += distance;
-    if (cycleWidth && carousel.scrollLeft >= cycleWidth) carousel.scrollLeft -= cycleWidth;
+  const blocked = document.hidden || Boolean(document.querySelector('dialog[open]'));
+  for (const state of carouselStates) {
+    if (blocked || state.paused || state.pointer || state.hovering || state.focused || time <= state.userScrollUntil) continue;
+    const cycleWidth = state.group.getBoundingClientRect().width;
+    state.fraction += elapsed * 0.036;
+    const distance = Math.floor(state.fraction);
+    state.fraction -= distance;
+    state.viewport.scrollLeft += distance;
+    if (cycleWidth && state.viewport.scrollLeft >= cycleWidth) state.viewport.scrollLeft -= cycleWidth;
   }
-  requestAnimationFrame(animateCarousel);
+  requestAnimationFrame(animateCarousels);
 }
-updateControl();
-requestAnimationFrame(animateCarousel);
+requestAnimationFrame(animateCarousels);
