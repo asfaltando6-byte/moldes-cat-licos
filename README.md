@@ -41,3 +41,7 @@ O botão da oferta abre diretamente o checkout da Cakto: https://pay.cakto.com.b
 Na raiz, execute `python3 -m http.server 8080 --directory dist` e abra `http://localhost:8080`.
 
 O Pixel da Meta **1000784222921167** está configurado com o evento **PageView**, uma vez por carregamento. Não há evento Purchase nos botões nem integração de pagamento configurada. A fonte Montserrat é hospedada localmente, com Arial como alternativa do sistema.
+
+## Responsividade mobile
+
+Layout adaptado a telas compactas: tipografia fluida, margens seguras, cartões de bônus com imagem e texto lado a lado, oferta sem cortes, controles de pelo menos 44 px e proteção da área do checkout contra sobreposição das notificações. Carrosséis mantêm rolagem por toque e retomam a animação após interação por toque; a pausa por foco permanece para navegação com teclado.

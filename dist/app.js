@@ -36,7 +36,7 @@ const carouselStates = [...document.querySelectorAll('.pages-section')].map(sect
   window.addEventListener('pointercancel', () => { state.pointer = false; });
   viewport.addEventListener('pointerenter', event => { if (event.pointerType === 'mouse') state.hovering = true; });
   viewport.addEventListener('pointerleave', () => { state.hovering = false; });
-  viewport.addEventListener('focusin', () => { state.focused = true; });
+  viewport.addEventListener('focusin', () => { state.focused = viewport.matches(':focus-visible'); });
   viewport.addEventListener('focusout', () => { state.focused = false; });
   viewport.addEventListener('wheel', () => { state.userScrollUntil = performance.now() + 2500; }, { passive: true });
   viewport.addEventListener('touchstart', () => { state.userScrollUntil = performance.now() + 4000; }, { passive: true });

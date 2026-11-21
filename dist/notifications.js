@@ -10,6 +10,18 @@
   let nextTimer;
   let hideTimer;
   let transitionTimer;
+  let offerInView = false;
+  const mobileScreen = window.matchMedia('(max-width: 600px)');
+  const offer = document.getElementById('oferta');
+  if (offer && 'IntersectionObserver' in window) {
+    new IntersectionObserver(entries => {
+      offerInView = entries[0].isIntersecting;
+      if (mobileScreen.matches && offerInView) {
+        clearTimeout(hideTimer);
+        hide();
+      }
+    }).observe(offer);
+  }
   try { stopped = sessionStorage.getItem(storageKey) === '1'; } catch {}
   function hide() {
     notice.classList.remove('is-visible');
@@ -17,7 +29,7 @@
   }
   function show() {
     if (stopped) return;
-    if (document.hidden || document.querySelector('dialog[open]')) {
+    if (document.hidden || document.querySelector('dialog[open]') || (mobileScreen.matches && offerInView)) {
       nextTimer = setTimeout(show, 5000);
       return;
     }
