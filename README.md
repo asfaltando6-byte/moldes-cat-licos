@@ -4,7 +4,7 @@ Landing page completa em português, com imagens locais, fonte Montserrat, dois 
 
 ## Hospedar na Vercel
 
-Importe este repositório na Vercel. O arquivo `vercel.json` define o diretório de publicação como `dist` e não utiliza framework. Não há dependências para instalar ou etapa de compilação. Se solicitado, selecione **Other**, deixe o comando de build vazio e use **dist** como Output Directory.
+Importe este repositório na Vercel. O arquivo `vercel.json` define o diretório de publicação como `dist` e não utiliza framework. Não há dependências para instalar. O comando `node scripts/optimize.mjs` prepara os estilos, o Pixel e o JavaScript antes da publicação. Se solicitado, selecione **Other**, use `node scripts/optimize.mjs` como comando de build e use **dist** como Output Directory.
 
 ## Estrutura
 
@@ -45,3 +45,11 @@ O Pixel da Meta **1000784222921167** está configurado com o evento **PageView**
 ## Responsividade mobile
 
 Layout adaptado a telas compactas: tipografia fluida, margens seguras, cartões de bônus com imagem e texto lado a lado, oferta sem cortes, controles de pelo menos 44 px e proteção da área do checkout contra sobreposição das notificações. Carrosséis mantêm rolagem por toque e retomam a animação após interação por toque; a pausa por foco permanece para navegação com teclado.
+
+## Otimização da primeira abertura
+
+Edite `dist/styles.css`, `dist/app.js`, `dist/clientes.js`, `dist/notifications.js` e `dist/meta-pixel.js` como arquivos-fonte. Execute `node scripts/optimize.mjs` antes de publicar; a Vercel executa o mesmo comando automaticamente. O processo é determinístico e pode ser repetido: incorpora o CSS na página, preserva a inicialização imediata do Pixel e gera um único JavaScript local com nome baseado no conteúdo.
+
+O mockup usa AVIF responsivo com fallback WebP. As imagens de galeria e carrosséis usam AVIF quando suportado. A fonte Montserrat mantém os pesos de 400 a 800 e os caracteres latinos usados no português. Arquivos gerados em `dist/assets/optimized/` usam nomes com hash e cache longo; nunca substitua o conteúdo mantendo o nome antigo. Os originais e a licença da fonte permanecem no projeto.
+
+As otimizações reduzem transferências e solicitações que bloqueiam a primeira exibição. O connect rate também depende da conexão do visitante, do navegador e da mensuração; não há promessa de resultado de campanha.

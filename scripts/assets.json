@@ -1,0 +1,51 @@
+{
+  "hero": [
+    {
+      "width": 480,
+      "path": "assets/optimized/mockup-480.b764be5186.avif",
+      "bytes": 23101
+    },
+    {
+      "width": 768,
+      "path": "assets/optimized/mockup-768.bd0d35a8d7.avif",
+      "bytes": 50018
+    },
+    {
+      "width": 1200,
+      "path": "assets/optimized/mockup-1200.1751d6f2b8.avif",
+      "bytes": 99282
+    },
+    {
+      "width": 1536,
+      "path": "assets/optimized/mockup-1536.270c4b0622.avif",
+      "bytes": 143047
+    }
+  ],
+  "backgrounds": {
+    "pages": {
+      "path": "assets/optimized/pages.48daedd9b6.avif",
+      "bytes": 126596,
+      "beforeBytes": 291234
+    },
+    "newPages": {
+      "path": "assets/optimized/newPages.85d1648f51.avif",
+      "bytes": 159632,
+      "beforeBytes": 348810
+    },
+    "gallery": {
+      "path": "assets/optimized/gallery.16b02a0447.avif",
+      "bytes": 173555,
+      "beforeBytes": 469512
+    },
+    "bonuses": {
+      "path": "assets/optimized/bonuses.9c9dbe0bca.avif",
+      "bytes": 137999,
+      "beforeBytes": 319160
+    }
+  },
+  "font": {
+    "path": "assets/optimized/montserrat.e1802b1946.woff2",
+    "bytes": 33388,
+    "beforeBytes": 37956
+  }
+}
