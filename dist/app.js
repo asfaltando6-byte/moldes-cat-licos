@@ -8,12 +8,6 @@ document.querySelectorAll('.piece-open').forEach(button => button.addEventListen
   document.getElementById('piece-title').textContent = names[index];
   pieceDialog.showModal();
 }));
-const purchaseDialog = document.getElementById('purchase-dialog');
-document.querySelectorAll('.purchase').forEach(button => button.addEventListener('click', () => {
-  document.getElementById('selected-plan').textContent = button.dataset.plan;
-  document.getElementById('selected-price').textContent = button.dataset.price;
-  purchaseDialog.showModal();
-}));
 document.querySelectorAll('dialog').forEach(dialog => {
   dialog.querySelectorAll('.dialog-close, .dialog-dismiss').forEach(button => button.addEventListener('click', () => dialog.close()));
   dialog.addEventListener('click', event => {
@@ -27,9 +21,12 @@ const carouselStates = [...document.querySelectorAll('.pages-section')].map(sect
   const viewport = section.querySelector('.carousel-window');
   const group = section.querySelector('.carousel-run');
   const toggle = section.querySelector('.carousel-toggle');
-  const state = { viewport, group, toggle, paused: reducedMotion.matches, pointer: false, hovering: false, focused: false, userScrollUntil: 0, fraction: 0 };
+  const state = { viewport, group, toggle, paused: reducedMotion.matches, pointer: false, hovering: false, focused: false, userScrollUntil: 0, fraction: 0, visible: true, cycleWidth: group.getBoundingClientRect().width };
+  if ('ResizeObserver' in window) new ResizeObserver(() => { state.cycleWidth = group.getBoundingClientRect().width; }).observe(group);
+  else window.addEventListener('resize', () => { state.cycleWidth = group.getBoundingClientRect().width; });
+  if ('IntersectionObserver' in window) new IntersectionObserver(entries => { state.visible = entries[0].isIntersecting; }).observe(section);
   function updateControl() {
-    toggle.textContent = state.paused ? '▶' : 'Ⅱ';
+    toggle.textContent = '';
     toggle.setAttribute('aria-pressed', String(state.paused));
     toggle.setAttribute('aria-label', state.paused ? 'Reproduzir carrossel automático' : 'Pausar carrossel automático');
   }
@@ -52,10 +49,10 @@ let lastFrame = 0;
 function animateCarousels(time) {
   const elapsed = lastFrame ? Math.min(time - lastFrame, 50) : 0;
   lastFrame = time;
-  const blocked = document.hidden || Boolean(document.querySelector('dialog[open]'));
+  const blocked = document.hidden || pieceDialog.open;
   for (const state of carouselStates) {
-    if (blocked || state.paused || state.pointer || state.hovering || state.focused || time <= state.userScrollUntil) continue;
-    const cycleWidth = state.group.getBoundingClientRect().width;
+    if (blocked || !state.visible || state.paused || state.pointer || state.hovering || state.focused || time <= state.userScrollUntil) continue;
+    const cycleWidth = state.cycleWidth;
     state.fraction += elapsed * 0.036;
     const distance = Math.floor(state.fraction);
     state.fraction -= distance;
@@ -65,3 +62,18 @@ function animateCarousels(time) {
   requestAnimationFrame(animateCarousels);
 }
 requestAnimationFrame(animateCarousels);
+
+const deferredMedia = document.querySelectorAll('[data-lazy-media]');
+if ('IntersectionObserver' in window) {
+  const mediaObserver = new IntersectionObserver(entries => {
+    for (const entry of entries) {
+      if (!entry.isIntersecting) continue;
+      entry.target.classList.add('media-ready');
+      mediaObserver.unobserve(entry.target);
+    }
+  }, { rootMargin: '160px 0px' });
+  deferredMedia.forEach(section => mediaObserver.observe(section));
+  window.addEventListener('error', event => {
+    if (event.filename && event.filename.includes('app.js')) document.documentElement.classList.remove('lazy-media-supported');
+  }, { once: true });
+} else deferredMedia.forEach(section => section.classList.add('media-ready'));

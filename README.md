@@ -23,12 +23,21 @@ As notificações começam após 9 segundos, ficam visíveis por 6,5 segundos e 
 
 Oferta única: **200 moldes em PDF + 4 bônus por R$ 19,90**. Bônus: guia e fichas de precificação, tags e cartões católicos, catálogo de crochê católico e controle de encomendas com calendário. Garantia proposta de 30 dias.
 
-## Antes de começar a vender
+## Checkout e entrega
 
-Os botões da oferta abrem um aviso de preparação da coleção. O checkout não foi fornecido nesta conversa: substitua essa ação pelo link correto antes de enviar tráfego. Os PDFs do produto não foram fornecidos nem produzidos neste projeto. As imagens de páginas e os mockups ilustram a proposta e não são moldes técnicos utilizáveis.
+O botão da oferta abre diretamente o checkout da Cakto: https://pay.cakto.com.br/xrohfmr_1352455. O valor apresentado na página é R$ 19,90. Os PDFs são entregues pela configuração do produto na plataforma de pagamento; não estão incluídos neste repositório. As imagens de páginas e os mockups ilustram a proposta e não são moldes técnicos utilizáveis.
+
+## Carregamento
+
+- Montserrat variável em WOFF2 hospedada localmente, com licença OFL incluída.
+- Mockup responsivo em 480, 768, 1200 e 1536 px; preload alinhado ao tamanho da tela.
+- Imagem da oferta com carregamento adiado e decodificação assíncrona.
+- Imagens de carrosséis, galeria e bônus carregadas perto da área visível.
+- Animação dos carrosséis pausada fora da tela, sem medir largura em cada quadro.
+- Scripts adiados; Pixel preservado com PageView.
 
 ## Rodar localmente
 
 Na raiz, execute `python3 -m http.server 8080 --directory dist` e abra `http://localhost:8080`.
 
-O Pixel da Meta **1000784222921167** está configurado com o evento **PageView**, uma vez por carregamento. Não há evento Purchase nos botões nem integração de pagamento configurada. Google Fonts é usado com alternativa Montserrat/Arial do sistema.
+O Pixel da Meta **1000784222921167** está configurado com o evento **PageView**, uma vez por carregamento. Não há evento Purchase nos botões nem integração de pagamento configurada. A fonte Montserrat é hospedada localmente, com Arial como alternativa do sistema.
