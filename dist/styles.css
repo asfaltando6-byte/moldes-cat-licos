@@ -237,3 +237,17 @@ html:has(dialog[open]){overflow:hidden}
  .craft-step h3{grid-column:2;margin:0;font-size:1rem;line-height:1.4}
  .craft-step p{grid-column:2;margin:0;font-size:1rem;line-height:1.55}
 }
+
+/* Lista vertical explícita em celulares, inclusive em orientação horizontal. */
+@media(max-width:1024px){
+ #etapas-dos-moldes .craft-steps-grid{display:flex;flex-direction:column;align-items:stretch;width:100%;max-width:680px;gap:12px}
+ #etapas-dos-moldes .craft-step{display:grid;grid-template-columns:36px minmax(0,1fr);grid-template-rows:auto auto;gap:4px 12px;flex:none;width:100%;min-width:0;padding:16px}
+ #etapas-dos-moldes .craft-step-icon{grid-column:1;grid-row:1 / span 2;width:36px;height:36px;margin:0;font-size:1.35rem}
+ #etapas-dos-moldes .craft-step h3{grid-column:2;grid-row:1;margin:0;line-height:1.4}
+ #etapas-dos-moldes .craft-step p{grid-column:2;grid-row:2;margin:0;line-height:1.55}
+}
+@media(max-width:767px){
+ .hero .hero-benefits{display:flex;flex-direction:column;align-items:stretch;width:100%;max-width:440px;gap:11px}
+ .hero .hero-benefits li{width:100%;min-width:0;align-items:center}
+ .audience-section .audience-grid{grid-template-columns:minmax(0,1fr)}
+}
