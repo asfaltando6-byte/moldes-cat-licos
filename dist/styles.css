@@ -220,3 +220,11 @@ html:has(dialog[open]){overflow:hidden}
  .faq-list summary{padding-block:17px}
 }
 @media(max-width:359px){.craft-step{padding:17px 13px;grid-template-columns:34px minmax(0,1fr)}}
+
+/* Resumo compacto das quatro etapas principais. */
+.craft-steps-grid{max-width:960px;margin-inline:auto;gap:14px}
+.craft-step{padding:16px 14px}
+.craft-step-icon{width:30px;height:30px;font-size:1.25rem;margin-bottom:10px}
+.craft-step h3{margin-bottom:6px}
+.craft-step p{line-height:1.5}
+@media(max-width:600px){.craft-steps-grid{gap:12px}.craft-step{padding:14px 12px}.craft-step-icon{width:28px;height:28px;font-size:1.2rem;margin-bottom:9px}.craft-step h3{margin-bottom:6px}}
