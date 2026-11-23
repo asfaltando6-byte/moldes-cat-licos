@@ -269,3 +269,8 @@ html:has(dialog[open]){overflow:hidden}
  .hero h1{font-size:clamp(2rem,9.1vw,2.625rem);line-height:1.2;letter-spacing:-.035em}
  .hero .subheadline{font-size:1.125rem;line-height:1.65;margin-top:18px}
 }
+
+/* Ênfase da headline escolhida. */
+.hero h1{color:#40483f}
+.hero h1 .headline-faith{color:#173c31}
+.hero h1 .headline-molds{color:#a34e35}
