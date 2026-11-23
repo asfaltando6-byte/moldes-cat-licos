@@ -25,7 +25,7 @@ Duas opções: **Kit Básico com 50 moldes em PDF por R$ 9,90**, sem bônus, e *
 
 ## Checkout e entrega
 
-O botão do Kit Básico abre https://pay.cakto.com.br/kj6xqik. O botão do Kit Completo abre diretamente o checkout da Cakto: https://pay.cakto.com.br/xrohfmr_1352455. O valor apresentado na página é R$ 19,90. Os PDFs são entregues pela configuração do produto na plataforma de pagamento; não estão incluídos neste repositório. As imagens de páginas e os mockups ilustram a proposta e não são moldes técnicos utilizáveis.
+O botão do Kit Básico abre https://pay.wiapy.com/6b0473b110580f1b4d28c607. O botão do Kit Completo abre diretamente o checkout da Wiapy: https://pay.wiapy.com/6b047296922697658e8ea99a. O valor apresentado na página é R$ 19,90. Os PDFs são entregues pela configuração do produto na plataforma de pagamento; não estão incluídos neste repositório. As imagens de páginas e os mockups ilustram a proposta e não são moldes técnicos utilizáveis.
 
 ## Carregamento
 
