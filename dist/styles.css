@@ -113,3 +113,22 @@ html:has(dialog[open]){overflow:hidden}
 .bonus-sprite{background-image:image-set(url("assets/optimized/bonuses.9c9dbe0bca.avif") type("image/avif"),url("assets/bonus-vendas.webp") type("image/webp"))}
 
 .new-pages{background-image:image-set(url("assets/optimized/newPages.85d1648f51.avif") type("image/avif"),url("assets/novos-moldes.webp") type("image/webp"))}
+
+/* Comparação das duas opções de acesso. */
+.pricing-grid{grid-template-columns:minmax(0,1fr) minmax(0,1.16fr);max-width:900px;gap:24px;align-items:start}
+.basic{margin-top:24px}
+.basic .contents-highlight{margin-top:22px;background:#f0eee6;border-color:#dedfd1}
+.basic-limit{font-size:.9375rem;line-height:1.65;color:var(--muted);padding-top:12px;border-top:1px solid var(--line)}
+.plan-heading .upgrade-note{font-size:1rem;line-height:1.6;color:var(--green);background:#e9eddf;border-radius:7px;padding:12px;margin-top:16px}
+.recommended{font-size:.8125rem;letter-spacing:.025em}
+@media(max-width:700px){
+ .pricing-grid{grid-template-columns:minmax(0,1fr);max-width:440px;gap:22px}
+ .premium{grid-row:1}
+ .basic{margin-top:0;padding:22px 18px}
+ .basic .plan-heading h3{font-size:1.75rem}
+ .basic .check-list li{font-size:1rem;line-height:1.65}
+ .basic .price>strong{font-size:clamp(2.75rem,14vw,3.75rem)}
+ .basic .price>strong>span{font-size:.7em}
+ .basic .price-card .button{font-size:1rem}
+ .recommended{font-size:.8125rem}
+}

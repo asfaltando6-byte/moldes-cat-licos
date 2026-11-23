@@ -21,11 +21,11 @@ As notificações começam após 9 segundos, ficam visíveis por 6,5 segundos e 
 
 ## Oferta
 
-Oferta única: **200 moldes em PDF + 4 bônus por R$ 19,90**. Bônus: guia e fichas de precificação, tags e cartões católicos, catálogo de crochê católico e controle de encomendas com calendário. Garantia proposta de 30 dias.
+Duas opções: **Kit Básico com 50 moldes em PDF por R$ 9,90**, sem bônus, e **Kit Completo com 200 moldes em PDF + 4 bônus por R$ 19,90**, destacado como recomendado. Bônus: guia e fichas de precificação, tags e cartões católicos, catálogo de crochê católico e controle de encomendas com calendário. Garantia proposta de 30 dias.
 
 ## Checkout e entrega
 
-O botão da oferta abre diretamente o checkout da Cakto: https://pay.cakto.com.br/xrohfmr_1352455. O valor apresentado na página é R$ 19,90. Os PDFs são entregues pela configuração do produto na plataforma de pagamento; não estão incluídos neste repositório. As imagens de páginas e os mockups ilustram a proposta e não são moldes técnicos utilizáveis.
+O botão do Kit Básico abre https://pay.cakto.com.br/kj6xqik. O botão do Kit Completo abre diretamente o checkout da Cakto: https://pay.cakto.com.br/xrohfmr_1352455. O valor apresentado na página é R$ 19,90. Os PDFs são entregues pela configuração do produto na plataforma de pagamento; não estão incluídos neste repositório. As imagens de páginas e os mockups ilustram a proposta e não são moldes técnicos utilizáveis.
 
 ## Carregamento
 
