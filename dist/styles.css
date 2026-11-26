@@ -274,3 +274,26 @@ html:has(dialog[open]){overflow:hidden}
 .hero h1{color:#40483f}
 .hero h1 .headline-faith{color:#173c31}
 .hero h1 .headline-molds{color:#a34e35}
+
+/* Hero no formato da referência: identificação, título, mockup, descrição e CTA. */
+.hero-announcement{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--green);color:#fffaf0;padding:12px 20px;text-align:center;font-size:.875rem;font-weight:700;line-height:1.5}
+.hero.hero-reference{max-width:1120px;padding-block:44px 36px;text-align:center}
+.hero-reference .hero-trust{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:7px 17px;border-radius:999px;background:#e6eedf;color:var(--green);font-size:.875rem;font-weight:700;line-height:1.5;margin:0 auto 24px}
+.hero-reference h1{max-width:1040px;margin:0 auto;font-size:clamp(2.3rem,4.6vw,3.75rem);font-weight:800;line-height:1.13;letter-spacing:-.04em;text-wrap:balance}
+.hero-reference .hero-format{display:inline-block;max-width:100%;margin:24px auto 27px;padding:7px 17px;border-radius:999px;background:#eee7d9;color:var(--green);font-size:.875rem;font-weight:700;line-height:1.5;letter-spacing:.035em}
+.hero.hero-reference>picture{display:block;width:min(940px,100%);margin:0 auto 24px}
+.hero-reference .hero-mockup{display:block;width:100%;height:auto;max-height:none;object-fit:contain;border-radius:0;box-shadow:none;margin:0}
+.hero.hero-reference .subheadline{max-width:850px;margin:0 auto 27px;font-size:1.125rem;line-height:1.75;text-wrap:pretty}
+.hero-reference .hero-plan-button{min-width:440px;min-height:60px;padding:17px 28px;font-size:1rem;line-height:1.5;border-radius:10px;box-shadow:0 4px 0 #0c241d;text-transform:uppercase}
+.hero.hero-reference .hero-access{max-width:800px;margin:22px auto 0;font-size:.875rem;line-height:1.6;color:var(--muted)}
+@media(max-width:600px){
+ .hero-announcement{padding:10px 16px;font-size:.75rem;gap:6px}
+ .hero.hero-reference{padding-block:27px 28px}
+ .hero-reference .hero-trust{font-size:.8125rem;padding:7px 12px;margin-bottom:21px}
+ .hero-reference h1{font-size:clamp(2rem,8.5vw,2.65rem);line-height:1.17;letter-spacing:-.035em}
+ .hero-reference .hero-format{font-size:.75rem;line-height:1.6;padding:7px 13px;margin:19px auto 22px}
+ .hero.hero-reference>picture{margin-bottom:20px}
+ .hero.hero-reference .subheadline{font-size:1rem;line-height:1.75;margin-bottom:24px}
+ .hero-reference .hero-plan-button{width:100%;min-width:0;padding:16px 15px;font-size:1rem;min-height:60px}
+ .hero.hero-reference .hero-access{margin-top:18px;font-size:.8125rem;line-height:1.6}
+}

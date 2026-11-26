@@ -1,24 +1,16 @@
 {
   "hero": [
     {
-      "width": 480,
-      "path": "assets/optimized/mockup-480.b764be5186.avif",
-      "bytes": 23101
+      "width": 640,
+      "path": "assets/optimized/hero-catolico-640.e34920bca0.avif",
+      "bytes": 40876,
+      "ext": "avif"
     },
     {
-      "width": 768,
-      "path": "assets/optimized/mockup-768.bd0d35a8d7.avif",
-      "bytes": 50018
-    },
-    {
-      "width": 1200,
-      "path": "assets/optimized/mockup-1200.1751d6f2b8.avif",
-      "bytes": 99282
-    },
-    {
-      "width": 1536,
-      "path": "assets/optimized/mockup-1536.270c4b0622.avif",
-      "bytes": 143047
+      "width": 1280,
+      "path": "assets/optimized/hero-catolico-1280.bf8f277d34.avif",
+      "bytes": 114363,
+      "ext": "avif"
     }
   ],
   "backgrounds": {
@@ -47,5 +39,13 @@
     "path": "assets/optimized/montserrat.e1802b1946.woff2",
     "bytes": 33388,
     "beforeBytes": 37956
-  }
+  },
+  "heroFallback": [
+    {
+      "width": 960,
+      "path": "assets/optimized/hero-catolico-960.372fc44106.webp",
+      "bytes": 134786,
+      "ext": "webp"
+    }
+  ]
 }
