@@ -21,16 +21,16 @@ const carouselStates = [...document.querySelectorAll('.pages-section')].map(sect
   const viewport = section.querySelector('.carousel-window');
   const group = section.querySelector('.carousel-run');
   const toggle = section.querySelector('.carousel-toggle');
-  const state = { viewport, group, toggle, paused: reducedMotion.matches, pointer: false, hovering: false, focused: false, userScrollUntil: 0, fraction: 0, visible: true, cycleWidth: group.getBoundingClientRect().width };
+  const state = { viewport, group, toggle, paused: reducedMotion.matches, pointer: false, hovering: false, focused: false, userScrollUntil: 0, fraction: 0, visible: !('IntersectionObserver' in window), cycleWidth: group.getBoundingClientRect().width };
   if ('ResizeObserver' in window) new ResizeObserver(() => { state.cycleWidth = group.getBoundingClientRect().width; }).observe(group);
   else window.addEventListener('resize', () => { state.cycleWidth = group.getBoundingClientRect().width; });
-  if ('IntersectionObserver' in window) new IntersectionObserver(entries => { state.visible = entries[0].isIntersecting; }).observe(section);
+  if ('IntersectionObserver' in window) new IntersectionObserver(entries => { state.visible = entries[0].isIntersecting; scheduleCarouselFrame(); }).observe(section);
   function updateControl() {
     toggle.textContent = '';
     toggle.setAttribute('aria-pressed', String(state.paused));
     toggle.setAttribute('aria-label', state.paused ? 'Reproduzir carrossel automático' : 'Pausar carrossel automático');
   }
-  toggle.addEventListener('click', () => { state.paused = !state.paused; updateControl(); });
+  toggle.addEventListener('click', () => { state.paused = !state.paused; updateControl(); scheduleCarouselFrame(); });
   viewport.addEventListener('pointerdown', () => { state.pointer = true; });
   window.addEventListener('pointerup', () => { state.pointer = false; });
   window.addEventListener('pointercancel', () => { state.pointer = false; });
@@ -41,12 +41,22 @@ const carouselStates = [...document.querySelectorAll('.pages-section')].map(sect
   viewport.addEventListener('wheel', () => { state.userScrollUntil = performance.now() + 2500; }, { passive: true });
   viewport.addEventListener('touchstart', () => { state.userScrollUntil = performance.now() + 4000; }, { passive: true });
   viewport.addEventListener('touchend', () => { state.userScrollUntil = performance.now() + 2500; }, { passive: true });
-  reducedMotion.addEventListener('change', event => { state.paused = event.matches; updateControl(); });
+  reducedMotion.addEventListener('change', event => { state.paused = event.matches; updateControl(); scheduleCarouselFrame(); });
   updateControl();
   return state;
 });
 let lastFrame = 0;
+let carouselFrame = 0;
+function carouselIsActive() {
+  return !document.hidden && !pieceDialog.open && carouselStates.some(state => state.visible && !state.paused);
+}
+function scheduleCarouselFrame() {
+  if (carouselFrame || !carouselIsActive()) return;
+  carouselFrame = requestAnimationFrame(animateCarousels);
+}
 function animateCarousels(time) {
+  carouselFrame = 0;
+  if (!carouselIsActive()) { lastFrame = 0; return; }
   const elapsed = lastFrame ? Math.min(time - lastFrame, 50) : 0;
   lastFrame = time;
   const blocked = document.hidden || pieceDialog.open;
@@ -59,21 +69,14 @@ function animateCarousels(time) {
     state.viewport.scrollLeft += distance;
     if (cycleWidth && state.viewport.scrollLeft >= cycleWidth) state.viewport.scrollLeft -= cycleWidth;
   }
-  requestAnimationFrame(animateCarousels);
+  scheduleCarouselFrame();
 }
-requestAnimationFrame(animateCarousels);
-
-const deferredMedia = document.querySelectorAll('[data-lazy-media]');
-if ('IntersectionObserver' in window) {
-  const mediaObserver = new IntersectionObserver(entries => {
-    for (const entry of entries) {
-      if (!entry.isIntersecting) continue;
-      entry.target.classList.add('media-ready');
-      mediaObserver.unobserve(entry.target);
-    }
-  }, { rootMargin: '160px 0px' });
-  deferredMedia.forEach(section => mediaObserver.observe(section));
-  window.addEventListener('error', event => {
-    if (event.filename && event.filename.includes('app.js')) document.documentElement.classList.remove('lazy-media-supported');
-  }, { once: true });
-} else deferredMedia.forEach(section => section.classList.add('media-ready'));
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) {
+    cancelAnimationFrame(carouselFrame);
+    carouselFrame = 0;
+    lastFrame = 0;
+  } else scheduleCarouselFrame();
+});
+pieceDialog.addEventListener('close', scheduleCarouselFrame);
+scheduleCarouselFrame();

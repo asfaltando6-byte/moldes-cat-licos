@@ -1,4 +1,4 @@
-import { readFile, writeFile, readdir, unlink, access } from 'node:fs/promises';
+import { readFile, writeFile, access } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { join } from 'node:path';
@@ -24,7 +24,7 @@ const parts = await Promise.all(['clientes.js', 'app.js', 'notifications.js'].ma
 const bundle = parts.join('\n;\n');
 const hash = createHash('sha256').update(bundle).digest('hex').slice(0, 10);
 const bundleName = `site.${hash}.js`;
-const runtimeTag = `<script id="site-runtime" src="assets/optimized/${bundleName}" defer></script>`;
+const runtimeTag = `<script id="site-runtime" src="assets/optimized/${bundleName}" defer fetchpriority="low"></script>`;
 if (/<script id="site-runtime"[^>]*><\/script>/.test(html)) html = html.replace(/<script id="site-runtime"[^>]*><\/script>/, () => runtimeTag);
 else {
   const sources = /<script src="clientes\.js" defer><\/script>\s*<script src="app\.js" defer><\/script>\s*<script src="notifications\.js" defer><\/script>/;
@@ -35,5 +35,5 @@ const manifest = JSON.parse(await readFile(join(root, 'scripts/assets.json'), 'u
 await Promise.all([...manifest.hero.map(x => x.path), ...Object.values(manifest.backgrounds).map(x => x.path), manifest.font.path].map(path => access(join(dist, path))));
 await writeFile(join(assets, bundleName), bundle);
 await writeFile(join(dist, 'index.html'), html);
-for (const file of await readdir(assets)) if (/^site\.[a-f0-9]{10}\.js$/.test(file) && file !== bundleName) await unlink(join(assets, file));
+// Keep immutable bundles available for visitors who opened the previous HTML during a deployment.
 console.log(JSON.stringify({ cssInlineBytes: Buffer.byteLength(css), runtime: bundleName, pixel: 'PageView preserved', htmlBytes: Buffer.byteLength(html) }));

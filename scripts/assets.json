@@ -1,15 +1,27 @@
 {
   "hero": [
     {
-      "width": 640,
-      "path": "assets/optimized/hero-catolico-640.e34920bca0.avif",
-      "bytes": 40876,
+      "width": 480,
+      "path": "assets/optimized/hero-fast-480.30b206cec0.avif",
+      "bytes": 19014,
+      "ext": "avif"
+    },
+    {
+      "width": 768,
+      "path": "assets/optimized/hero-fast-768.a081ede133.avif",
+      "bytes": 38456,
+      "ext": "avif"
+    },
+    {
+      "width": 960,
+      "path": "assets/optimized/hero-fast-960.b04f3e350d.avif",
+      "bytes": 53005,
       "ext": "avif"
     },
     {
       "width": 1280,
-      "path": "assets/optimized/hero-catolico-1280.bf8f277d34.avif",
-      "bytes": 114363,
+      "path": "assets/optimized/hero-fast-1280.11f6cec2a8.avif",
+      "bytes": 82638,
       "ext": "avif"
     }
   ],
@@ -42,9 +54,21 @@
   },
   "heroFallback": [
     {
+      "width": 480,
+      "path": "assets/optimized/hero-fast-480.6c64a34cf3.webp",
+      "bytes": 39894,
+      "ext": "webp"
+    },
+    {
+      "width": 768,
+      "path": "assets/optimized/hero-fast-768.010c0b537d.webp",
+      "bytes": 82152,
+      "ext": "webp"
+    },
+    {
       "width": 960,
-      "path": "assets/optimized/hero-catolico-960.372fc44106.webp",
-      "bytes": 134786,
+      "path": "assets/optimized/hero-fast-960.e4d1299de0.webp",
+      "bytes": 117678,
       "ext": "webp"
     }
   ]
