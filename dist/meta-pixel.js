@@ -1,4 +1,4 @@
-/* Meta Pixel: visualização de página. Compras devem ser medidas no checkout. */
+/* Load the official Meta library early. Utmizey initializes the pixel and sends the single PageView. */
 !function(f,b,e,v,n,t,s){
   if(f.fbq)return;
   n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -7,5 +7,4 @@
   t=b.createElement(e);t.async=true;t.fetchPriority='low';t.src=v;
   s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s);
 }(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
-fbq('init','1000784222921167');
-fbq('track','PageView');
+/* PageView is sent exclusively by Utmizey to avoid duplicate visits. */

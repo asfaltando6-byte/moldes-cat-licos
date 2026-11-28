@@ -1,0 +1,17 @@
+{
+  "meta_pixel_id": "1000784222921167",
+  "meta_pixel_ids": [
+    "1000784222921167"
+  ],
+  "dashboard_id": null,
+  "send_lead": false,
+  "send_add_to_cart": false,
+  "send_initiate_checkout": false,
+  "detection_rule": null,
+  "detection_value": null,
+  "lead_rule": null,
+  "lead_value": null,
+  "atc_rule": null,
+  "atc_value": null,
+  "checkout_domains": []
+}
