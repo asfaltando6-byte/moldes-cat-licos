@@ -48,9 +48,9 @@
     }
   },
   "font": {
-    "path": "assets/optimized/montserrat.e1802b1946.woff2",
-    "bytes": 33388,
-    "beforeBytes": 37956
+    "path": "assets/optimized/montserrat-fast.087b3ef96f.woff2",
+    "bytes": 29188,
+    "beforeBytes": 33388
   },
   "heroFallback": [
     {
@@ -71,5 +71,45 @@
       "bytes": 117678,
       "ext": "webp"
     }
-  ]
+  ],
+  "responsiveBackgrounds": {
+    "pages": [
+      {
+        "path": "assets/optimized/pages-responsive-640.347b0b1aef.avif",
+        "bytes": 49706,
+        "width": 640
+      }
+    ],
+    "newPages": [
+      {
+        "path": "assets/optimized/newPages-responsive-640.71ae68370d.avif",
+        "bytes": 64346,
+        "width": 640
+      }
+    ],
+    "gallery": [
+      {
+        "path": "assets/optimized/gallery-responsive-768.9bb1013b85.avif",
+        "bytes": 42285,
+        "width": 768
+      },
+      {
+        "path": "assets/optimized/gallery-responsive-1024.71e85ae39a.avif",
+        "bytes": 72278,
+        "width": 1024
+      }
+    ],
+    "bonuses": [
+      {
+        "path": "assets/optimized/bonuses-responsive-480.39e26b83ca.avif",
+        "bytes": 32286,
+        "width": 480
+      },
+      {
+        "path": "assets/optimized/bonuses-responsive-768.46486e9398.avif",
+        "bytes": 69324,
+        "width": 768
+      }
+    ]
+  }
 }

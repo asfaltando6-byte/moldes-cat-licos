@@ -32,7 +32,7 @@ else {
   html = html.replace(sources, () => runtimeTag);
 }
 const manifest = JSON.parse(await readFile(join(root, 'scripts/assets.json'), 'utf8'));
-await Promise.all([...manifest.hero.map(x => x.path), ...Object.values(manifest.backgrounds).map(x => x.path), manifest.font.path].map(path => access(join(dist, path))));
+await Promise.all([...manifest.hero.map(x => x.path), ...Object.values(manifest.backgrounds).map(x => x.path), manifest.font.path, ...Object.values(manifest.responsiveBackgrounds || {}).flat().map(x => x.path)].map(path => access(join(dist, path))));
 await writeFile(join(assets, bundleName), bundle);
 await writeFile(join(dist, 'index.html'), html);
 // Keep immutable bundles available for visitors who opened the previous HTML during a deployment.
